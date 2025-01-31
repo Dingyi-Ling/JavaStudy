@@ -1,3 +1,4 @@
+package JavaAssignments;
 public class StringWarmUp {
     public static void PrintHalf(String str){
         System.out.println(str.substring(str.length()/2));
