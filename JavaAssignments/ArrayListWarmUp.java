@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-
 public class ArrayListWarmUp{
     public static ArrayList<Character> deleteOdd(ArrayList<Character> list){
         ArrayList<Character> returnList = new ArrayList<Character>();
