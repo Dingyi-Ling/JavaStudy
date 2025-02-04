@@ -1,5 +1,6 @@
 package SpellingBee;
 import java.util.*;
+import java.io.File;
 
 class SpellingBeeGame {
     private List<Character> letters;
@@ -19,14 +20,25 @@ class SpellingBeeGame {
     // Reads words from dictionary file and stores them in an ArrayList
     private ArrayList<String> loadDictionary(String filename) {
         ArrayList<String> wordList = new ArrayList<>();
-        Scanner scanner = new Scanner(filename);
+        // Create full path to dictionary file
+        String fullPath = "/workspaces/JavaStudy/SpellingBee/" + filename;
+        File dictionaryFile = new File(fullPath);
+        
+        // Check if file exists
+        if (!dictionaryFile.exists()) {
+            System.out.println("Error: Dictionary file not found at " + fullPath);
+            System.exit(1);
+        }
+
+        Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
-            String word = scanner.nextLine();
-            if (word.length() >= 4) { // Store only words of at least 4 letters
+            String word = scanner.nextLine().trim().toUpperCase();
+            if (word.length() >= 4) {
                 wordList.add(word);
             }
         }
         scanner.close();
+        System.out.println("Dictionary loaded with " + wordList.size() + " words.");
         return wordList;
     }
 
