@@ -68,5 +68,6 @@ public class SpellingBeeGame {
             }
         }
         System.out.println("Your score is " + score);
+        scanner.close();
     }
 }
