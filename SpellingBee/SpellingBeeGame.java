@@ -56,7 +56,11 @@ public class SpellingBeeGame {
         System.out.println("You found " + words.size() + " words:");
         System.out.println(words);
         for (String word : words) {
-            score += word.length() - 3;
+            if(word.length()==4){
+                score += 1;
+            } else {
+                score += word.length();
+            }
             boolean isPangram = true;
             for (char letter : letters) {
                 if (word.indexOf(letter) == -1) {
