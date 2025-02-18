@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Math_Methods {
+public class MathMethods {
     public static void test_positive(int number){
         if (number > 0){
             System.out.println("Positive");
@@ -56,6 +56,7 @@ public class Math_Methods {
     }
     public static void main(String[] args) {
         while (1>0){
+            @SuppressWarnings("resource")
             Scanner keyboard = new Scanner(System.in);
             System.out.println("If you want to determine if a integer is positive press 1");
             System.out.println("If you want to determine if a integer is even press 2");

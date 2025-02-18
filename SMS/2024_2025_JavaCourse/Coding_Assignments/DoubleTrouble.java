@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class DoubleTrouble {
+    @SuppressWarnings("resource")
     public static void main(String[] args) {
         // Display menu options to the user
         System.out.println("Enter 1 for CashRegister");
@@ -24,6 +25,7 @@ public class DoubleTrouble {
     }
     public static void CashRegister(){
         // Create a Scanner object to read user input
+        @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         double price = 1.00; 
         double subtotal = 0;

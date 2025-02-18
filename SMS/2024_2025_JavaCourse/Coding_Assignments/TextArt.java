@@ -22,6 +22,7 @@ public class TextArt {
     }
 
     public static void main(String[] args) {
+        @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter 1 for printDescendingStars");
         System.out.println("Enter 2 for printTreePattern");

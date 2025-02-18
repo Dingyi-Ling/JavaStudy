@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class WhilePractice {
+    @SuppressWarnings("resource")
     public static void main(String[] args) {
         System.out.println("Welcome to While Practice!");
         System.out.println("Enter 1 for printNumbers");
@@ -57,6 +58,7 @@ public class WhilePractice {
         scanner.close();
     }
     public static void findLargest(){
+        @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         int largest = 0;
         System.out.println("How many integers would you like to enter?");
