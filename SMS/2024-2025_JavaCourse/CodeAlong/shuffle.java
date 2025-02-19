@@ -14,6 +14,7 @@ public class shuffle {
             array[i] = array[randomIndex];
             array[randomIndex] = temp;
         }
+        System.out.println();
         for(int num: array){
             System.out.print(num + " ");
         }
