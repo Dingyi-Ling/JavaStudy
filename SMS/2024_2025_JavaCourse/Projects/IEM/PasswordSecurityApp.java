@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class PasswordSecurityApp {
+    //Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.
     static class CaesarCipher{
         private static Random random = new Random();
         //creates a random shift value from 1 to 5
@@ -27,6 +28,7 @@ public class PasswordSecurityApp {
             return decryptedText;
         }
     }
+    //Atbash Cipher is a substitution cipher where each letter in the plaintext is replaced with the letter at the same position in the alphabet but in reverse.
     static class AtbashCipher{
         public AtbashCipher() {}
         // Since Atbash is symmetric, encryption and decryption are identical.
