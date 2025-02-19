@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class PasswordSecurityApp {
     //Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.
@@ -51,18 +52,40 @@ public class PasswordSecurityApp {
         }
     }
     public static void main(String[] args) {
-        //Test Cases
         AtbashCipher atbashCipher = new AtbashCipher();
         CaesarCipher caesarCipher = new CaesarCipher();
-        String text = "Hello World";
-        String caeserEncryptedText = atbashCipher.encrypt(text);
-        String caeserDecryptedText = atbashCipher.decrypt(caeserEncryptedText);
-        String atbashEncryptedText = caesarCipher.encrypt(text);
-        String atbashDecryptedText = caesarCipher.decrypt(atbashEncryptedText);
-        System.out.println("Original Text: " + text);
-        System.out.println("Caeser Encrypted Text: " + caeserEncryptedText);
-        System.out.println("Caeser Decrypted Text: " + caeserDecryptedText);
-        System.out.println("Atbash Encrypted Text: " + atbashEncryptedText);
-        System.out.println("Atbash Decrypted Text: " + atbashDecryptedText);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n==== Interactive Password Security Explorer ====");
+        String password = "";
+        //Used do while loop, learnt from Stack Overflow https://stackoverflow.com/questions/20472169/when-would-a-do-while-loop-be-the-better-than-a-while-loop
+        do {
+            System.out.print("\nEnter a password: ");
+            password = scanner.nextLine();
+            if (password.indexOf(" ") != -1) {
+                System.out.println("Password cannot contain spaces. Please re-enter.");
+            }
+        } while (password.indexOf(" ") != -1);
+        
+        System.out.println("\nSelect encryption method:\n1. Caesar Cipher\n2. Atbash Cipher");
+        int choice = scanner.nextInt(); 
+        String encrypted = "";
+        do {
+            System.out.print("Enter your choice (1 or 2): ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline left by nextInt()
+            switch (choice) {
+                case 1:
+                    encrypted = caesarCipher.encrypt(password);
+                    System.out.println("Caesar Cipher Encrypted: " + encrypted);
+                    break;
+                case 2:
+                    encrypted = atbashCipher.encrypt(password);
+                    System.out.println("Atbash Cipher Encrypted: " + encrypted);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter 1 or 2.");
+            }
+        } while(choice != 1 && choice != 2);
+        scanner.close();
     }
 }
