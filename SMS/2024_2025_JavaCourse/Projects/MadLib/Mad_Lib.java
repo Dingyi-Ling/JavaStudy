@@ -2,6 +2,7 @@ import java.util.Scanner;
 public class Mad_Lib {
     public static void main(String[] args) {
         //Dingyi Part starts
+        @SuppressWarnings("resource")
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter the name of a Place");
         String Place1 = keyboard.nextLine();
