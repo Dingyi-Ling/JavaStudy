@@ -1,9 +1,12 @@
 public class shuffle {
     public static void main(String Args[]){
         int[] array = new int[10];
+        for (int i = 0; i < array.length; i++){
+            array[i] = i;
+        }
         array = shuffleArray(array);
         for(int num: array){
-            System.out.println(num);
+            System.out.print(num);
         }
     }
     public static int[] shuffleArray(int[] array){
