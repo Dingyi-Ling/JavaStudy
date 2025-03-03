@@ -52,12 +52,12 @@ public class PasswordSecurityApp {
         }
     }
     class PasswordDecryptor{
-        public PasswordDecryptor(int choice, String encrypted){
-            switch(choice){
-                case 1:
-                case 2:
-            }
+        private String encrypted;
+        public PasswordDecryptor(String encrypted){
+            encrypted = this.encrypted;
         }
+
+
     }
     //Dingyi Part Ends
     //Aiden Part Starts
