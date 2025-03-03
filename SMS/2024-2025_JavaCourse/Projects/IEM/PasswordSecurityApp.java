@@ -1,6 +1,5 @@
 import java.util.Random;
 import java.util.Scanner;
-// Dingyi Part Starts
 public class PasswordSecurityApp {
     //Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.
     static class CaesarCipher{
@@ -52,18 +51,21 @@ public class PasswordSecurityApp {
         }
     }
     class PasswordDecryptor{
+        //The estimated time to crack a password is based on the number of possible combinations of characters in the password.
         private String encrypted;
         public PasswordDecryptor(){}
         public void setEncrypted(String encrypted){
             this.encrypted = encrypted;
         }
         public double estimateCrackTime(){
+            //Assuming that a computer can check 1 billion combinations per second.
             double combinations = 0;
             combinations = Math.pow(encrypted.length(), calculateSize());
             combinations = combinations / 1000000000;
             return combinations;
         }
         private int calculateSize(){
+            //Complexity is based on the number of possible combinations of characters in the password.
             int complexity = 0;
             boolean hasLowerCase = false;
             boolean hasUpperCase = false;
@@ -91,9 +93,8 @@ public class PasswordSecurityApp {
             }
         }
     }
-    //Dingyi Part Ends
-    //Aiden Part Starts
-    public static void main(String[] args) {
+    public static void PasswordSecurityExplorer(){
+        //The PasswordSecurityExplorer method is used to explore the security of a password by encrypting and decrypting it using different methods.
         AtbashCipher atbashCipher = new AtbashCipher();
         CaesarCipher caesarCipher = new CaesarCipher();
         Scanner scanner = new Scanner(System.in);
@@ -140,6 +141,9 @@ public class PasswordSecurityApp {
         double combinations = passwordDecryptor.estimateCrackTime();
         System.out.println("Estimated time to crack: " + combinations + " seconds");
         scanner.close();
+    }
+    public static void main(String[] args) {
+        PasswordSecurityExplorer();
     }
     //Aiden Part Ends
 }
