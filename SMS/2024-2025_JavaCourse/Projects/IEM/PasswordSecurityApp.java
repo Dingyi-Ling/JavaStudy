@@ -53,17 +53,42 @@ public class PasswordSecurityApp {
     }
     class PasswordDecryptor{
         private String encrypted;
-        public PasswordDecryptor(String encrypted){
-            encrypted = this.encrypted;
+        public PasswordDecryptor(){}
+        public void setEncrypted(String encrypted){
+            this.encrypted = encrypted;
         }
         public double estimateCrackTime(){
             double combinations = 0;
+            combinations = Math.pow(encrypted.length(), calculateSize());
+            combinations = combinations / 1000000000;
             return combinations;
         }
         private int calculateSize(){
             int complexity = 0;
-        
-            return complexity;
+            boolean hasLowerCase = false;
+            boolean hasUpperCase = false;
+            boolean hasNumber = false;
+            boolean hasSpecialChar = false;
+            for(char ch: encrypted.toCharArray()) {
+                if(ch >= 'a' && ch <= 'z') {
+                    hasLowerCase = true;
+                } else if(ch >= 'A' && ch <= 'Z') {
+                    hasUpperCase = true;
+                } else if(ch >= '0' && ch <= '9') {
+                    hasNumber = true;
+                } else {
+                    hasSpecialChar = true;
+                }
+            }
+            if (hasLowerCase) {complexity += 26;}
+            if (hasUpperCase) {complexity += 26;}
+            if (hasNumber) {complexity += 10;}
+            if (hasSpecialChar) {complexity += 33;}
+            if(complexity > 0){
+                return complexity;
+            } else{
+                return 1;
+            }
         }
     }
     //Dingyi Part Ends
@@ -84,15 +109,15 @@ public class PasswordSecurityApp {
             System.out.print("\nEnter a password: ");
             password = scanner.nextLine();
         }
-        System.out.println("\nSelect encryption method:\n1. Caesar Cipher\n2. Atbash Cipher");
+        System.out.println("\nSelect encryption method:\n1. Caesar Cipher\n2. Atbash Cipher\n3.No Encryption");
         int choice = scanner.nextInt(); 
         String encrypted = "";
-        System.out.print("Enter your choice (1 or 2): ");
+        System.out.print("Enter your choice (1, 2 or 3): ");
         choice = scanner.nextInt();
         scanner.nextLine(); // Consume newline left by nextInt()
         while (choice != 1 && choice != 2) {
-            System.out.println("Invalid choice. Please enter 1 or 2.");
-            System.out.print("Enter your choice (1 or 2): ");
+            System.out.println("Invalid choice. Please enter 1, 2 or 3.");
+            System.out.print("Enter your choice (1, 2 or 3): ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline left by nextInt()
         }
@@ -105,7 +130,15 @@ public class PasswordSecurityApp {
                 encrypted = atbashCipher.encrypt(password);
                 System.out.println("Encrypted password: " + encrypted);
                 break;
+            case 3:
+                encrypted = password;
+                System.out.println("No encryption selected.");
+                break;
         }
+        PasswordDecryptor passwordDecryptor = new PasswordSecurityApp().new PasswordDecryptor();
+        passwordDecryptor.setEncrypted(encrypted);
+        double combinations = passwordDecryptor.estimateCrackTime();
+        System.out.println("Estimated time to crack: " + combinations + " seconds");
         scanner.close();
     }
     //Aiden Part Ends
