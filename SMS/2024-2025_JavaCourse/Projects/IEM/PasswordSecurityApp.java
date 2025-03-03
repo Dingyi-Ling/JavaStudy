@@ -56,8 +56,15 @@ public class PasswordSecurityApp {
         public PasswordDecryptor(String encrypted){
             encrypted = this.encrypted;
         }
-
-
+        public double estimateCrackTime(){
+            double combinations = 0;
+            return combinations;
+        }
+        private int calculateSize(){
+            int complexity = 0;
+        
+            return complexity;
+        }
     }
     //Dingyi Part Ends
     //Aiden Part Starts
