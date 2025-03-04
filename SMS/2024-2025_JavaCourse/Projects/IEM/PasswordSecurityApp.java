@@ -142,8 +142,36 @@ public class PasswordSecurityApp {
         System.out.println("Estimated time to crack: " + combinations + " seconds");
         scanner.close();
     }
+    public static void simplePasswordCrackTimeEstimate(String password){
+        PasswordDecryptor passwordDecryptor = new PasswordSecurityApp().new PasswordDecryptor();
+        passwordDecryptor.setEncrypted(password);
+        double time = passwordDecryptor.estimateCrackTime();
+        System.out.println("Estimated time to crack: " + time + " seconds");
+    }
     public static void main(String[] args) {
-        PasswordSecurityExplorer();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("======Introduction to Ciphers and Connection to Data Security======");
+        System.out.println("Our program addresses the important issue of password security by showing how encryption affects the strength of passwords. \nThe main problem is that weak passwords are vulnerable to cyberattacks, especially brute force attacks, where hackers try different combinations until they find the correct one. \nMany people don't realize the importance of having strong passwords, which makes them easy targets for cybercriminals.");
+        System.out.println("For example try entering '123456' as your password.");
+        System.out.print("Enter your password: ");
+        String password = scanner.nextLine();
+        simplePasswordCrackTimeEstimate(password);
+        System.out.println("As seen the time taken to crack the password is almost instant.");
+        System.out.println("Now try entering 'password' as your password.");
+        password = scanner.nextLine();
+        simplePasswordCrackTimeEstimate(password);
+        System.out.println("As seen the time taken to crack the password is much slower.");
+        System.out.println("The process above should show you  risks of weak passwords, and shows real-world data breaches. \nAt this point you might see how important password security is today by knowing the real case of data breaches.");
+        System.out.println("Now consider a new component encryption methods, the choice of encryption method could also make a huge differnce in the security of your code");
+        System.out.println("Do you want a short introduction to ciphers? (y or n)");
+        if(scanner.nextLine() == "y") {
+            System.out.println("In this program we mainly focused on two simple ciphers to demonstrate the importance of it: \n Caeser Cipher and Atbash Cipher.");
+            System.out.println("Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.");
+            System.out.println("Atbash Cipher is a substitution cipher where each letter in the plaintext is replaced with the letter at the same position in the alphabet but in reverse.");
+            
+        }
+
+
     }
     //Aiden Part Ends
 }
