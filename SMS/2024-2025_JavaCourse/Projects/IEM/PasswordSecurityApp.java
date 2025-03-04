@@ -93,53 +93,79 @@ public class PasswordSecurityApp {
             }
         }
     }
+    public static void comparisonBetweenCiphers(){
+        AtbashCipher atbashCipher = new AtbashCipher();
+        CaesarCipher caesarCipher = new CaesarCipher();
+        System.out.print("\n Enter a password: ");
+        Scanner scanner = new Scanner(System.in);
+        String password = scanner.nextLine();
+        String encryptedByAtbash = atbashCipher.encrypt(password);
+        String encryptedByCaesar = caesarCipher.encrypt(password);
+        System.out.println("Encrypted by Atbash: " + encryptedByAtbash);
+        System.out.println("Encrypted by Caesar: " + encryptedByCaesar);
+        PasswordDecryptor passwordDecryptor = new PasswordSecurityApp().new PasswordDecryptor();
+        passwordDecryptor.setEncrypted(encryptedByAtbash);
+        double timeForAtbash = passwordDecryptor.estimateCrackTime();
+        passwordDecryptor.setEncrypted(encryptedByCaesar);
+        double timeForCaesar = passwordDecryptor.estimateCrackTime();
+        System.out.println("Estimated time to crack by Atbash: " + timeForAtbash + " seconds");
+        System.out.println("Estimated time to crack by Caesar: " + timeForCaesar + " seconds");
+        scanner.close();
+    }
     public static void PasswordSecurityExplorer(){
         //The PasswordSecurityExplorer method is used to explore the security of a password by encrypting and decrypting it using different methods.
         AtbashCipher atbashCipher = new AtbashCipher();
         CaesarCipher caesarCipher = new CaesarCipher();
         Scanner scanner = new Scanner(System.in);
-        String introduction = "";
-        System.out.println(introduction);
-        System.out.println("\n==== Interactive Password Security Explorer ====");
-        String password = "";
-        //Used do while loop, learnt from Stack Overflow https://stackoverflow.com/questions/20472169/when-would-a-do-while-loop-be-the-better-than-a-while-loop
-        System.out.print("\nEnter a password: ");
-        password = scanner.nextLine();
-        while (password.indexOf(" ") != -1) {
-            System.out.println("Password cannot contain spaces. Please re-enter.");
-            System.out.print("\nEnter a password: ");
-            password = scanner.nextLine();
-        }
-        System.out.println("\nSelect encryption method:\n1. Caesar Cipher\n2. Atbash Cipher\n3.No Encryption");
-        int choice = scanner.nextInt(); 
+        System.out.println("\n==== Cipher Password Security Explorer ====");
+        String password = "initial";
         String encrypted = "";
-        System.out.print("Enter your choice (1, 2 or 3): ");
-        choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline left by nextInt()
-        while (choice != 1 && choice != 2) {
-            System.out.println("Invalid choice. Please enter 1, 2 or 3.");
-            System.out.print("Enter your choice (1, 2 or 3): ");
-            choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline left by nextInt()
+        while (!password.isEmpty()) {
+            System.out.print("\nEnter a password (or press Enter to exit): ");
+            password = scanner.nextLine();
+            
+            if (!password.isEmpty()) {
+                // Check for spaces in password
+                while (password.indexOf(" ") != -1) {
+                    System.out.println("Password cannot contain spaces. Please re-enter.");
+                    System.out.print("\nEnter a password: ");
+                    password = scanner.nextLine();
+                }
+                
+                System.out.println("\nSelect encryption method:\n1. Caesar Cipher\n2. Atbash Cipher\n3.No Encryption");
+                int choice = 0;
+                System.out.print("Enter your choice (1, 2 or 3): ");
+                choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline left by nextInt()
+                
+                while (choice != 1 && choice != 2 && choice != 3) {
+                    System.out.println("Invalid choice. Please enter 1, 2 or 3.");
+                    System.out.print("Enter your choice (1, 2 or 3): ");
+                    choice = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline left by nextInt()
+                }
+                
+                switch(choice){
+                    case 1:
+                        encrypted = caesarCipher.encrypt(password);
+                        System.out.println("Encrypted password: " + encrypted);
+                        break;
+                    case 2:
+                        encrypted = atbashCipher.encrypt(password);
+                        System.out.println("Encrypted password: " + encrypted);
+                        break;
+                    case 3:
+                        encrypted = password;
+                        System.out.println("No encryption selected.");
+                        break;
+                }
+                
+                PasswordDecryptor passwordDecryptor = new PasswordSecurityApp().new PasswordDecryptor();
+                passwordDecryptor.setEncrypted(encrypted);
+                double combinations = passwordDecryptor.estimateCrackTime();
+                System.out.println("Estimated time to crack: " + combinations + " seconds\n");
+            }
         }
-        switch(choice){
-            case 1:
-                encrypted = caesarCipher.encrypt(password);
-                System.out.println("Encrypted password: " + encrypted);
-                break;
-            case 2:
-                encrypted = atbashCipher.encrypt(password);
-                System.out.println("Encrypted password: " + encrypted);
-                break;
-            case 3:
-                encrypted = password;
-                System.out.println("No encryption selected.");
-                break;
-        }
-        PasswordDecryptor passwordDecryptor = new PasswordSecurityApp().new PasswordDecryptor();
-        passwordDecryptor.setEncrypted(encrypted);
-        double combinations = passwordDecryptor.estimateCrackTime();
-        System.out.println("Estimated time to crack: " + combinations + " seconds");
         scanner.close();
     }
     public static void simplePasswordCrackTimeEstimate(String password){
@@ -152,6 +178,7 @@ public class PasswordSecurityApp {
         Scanner scanner = new Scanner(System.in);
         System.out.println("======Introduction to Ciphers and Connection to Data Security======");
         System.out.println("Our program addresses the important issue of password security by showing how encryption affects the strength of passwords. \nThe main problem is that weak passwords are vulnerable to cyberattacks, especially brute force attacks, where hackers try different combinations until they find the correct one. \nMany people don't realize the importance of having strong passwords, which makes them easy targets for cybercriminals.");
+        System.out.println();
         System.out.println("For example try entering '123456' as your password.");
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
@@ -161,17 +188,33 @@ public class PasswordSecurityApp {
         password = scanner.nextLine();
         simplePasswordCrackTimeEstimate(password);
         System.out.println("As seen the time taken to crack the password is much slower.");
-        System.out.println("The process above should show you  risks of weak passwords, and shows real-world data breaches. \nAt this point you might see how important password security is today by knowing the real case of data breaches.");
+        System.out.println("The process above should shows you risks of weak passwords, and shows real-world data breaches. \nAt this point you might see how important password security is today by knowing the real case of data breaches.");
+        System.out.println();
         System.out.println("Now consider a new component encryption methods, the choice of encryption method could also make a huge differnce in the security of your code");
         System.out.println("Do you want a short introduction to ciphers? (y or n)");
         if(scanner.nextLine() == "y") {
             System.out.println("In this program we mainly focused on two simple ciphers to demonstrate the importance of it: \n Caeser Cipher and Atbash Cipher.");
             System.out.println("Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.");
             System.out.println("Atbash Cipher is a substitution cipher where each letter in the plaintext is replaced with the letter at the same position in the alphabet but in reverse.");
-            
+            System.out.println("Bellow is a short game you can play to see the difference between the two.");
+            comparisonBetweenCiphers();
+        } else {
+            System.out.println("No way you're escaping this session, its so important to know!!!!");
+            System.out.println("You have no choice (just checking if your following)");
+            System.out.println("Lesson Starts!");
+            System.out.println("In this program we mainly focused on two simple ciphers to demonstrate the importance of it: \n Caeser Cipher and Atbash Cipher.");
+            System.out.println("Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.");
+            System.out.println("Atbash Cipher is a substitution cipher where each letter in the plaintext is replaced with the letter at the same position in the alphabet but in reverse.");
+            System.out.println("Bellow is a short game you can play to see the difference between the two.");
+            comparisonBetweenCiphers();
         }
+        System.out.println();
+        System.out.println("Password Strength");
+        System.out.println("From the example above you should gain some insights into the importance of password security.");
+        System.out.println("Now focus on the influence of capital letters, and special characters in passwords. Use the game bellow to help you explore its impacts to its strngth.");
+        System.out.println("You can play the game however mant time you want to see the difference.");
 
-
+        scanner.close();
     }
     //Aiden Part Ends
 }
