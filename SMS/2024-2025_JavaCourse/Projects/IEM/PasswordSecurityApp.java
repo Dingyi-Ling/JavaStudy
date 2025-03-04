@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
 public class PasswordSecurityApp {
     //Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.
     static class CaesarCipher{
@@ -94,6 +95,7 @@ public class PasswordSecurityApp {
         }
     }
     public static void comparisonBetweenCiphers(){
+        //The comparisonBetweenCiphers method is used to compare the security of two passwords encrypted by two different methods.
         AtbashCipher atbashCipher = new AtbashCipher();
         CaesarCipher caesarCipher = new CaesarCipher();
         System.out.print("\n Enter a password: ");
@@ -169,6 +171,8 @@ public class PasswordSecurityApp {
         scanner.close();
     }
     public static void simplePasswordCrackTimeEstimate(String password){
+        //The simplePasswordCrackTimeEstimate method is used to estimate the time it would take to crack a password.
+        System.out.println("\n==== Simple Password Crack Time Estimate ====");
         PasswordDecryptor passwordDecryptor = new PasswordSecurityApp().new PasswordDecryptor();
         passwordDecryptor.setEncrypted(password);
         double time = passwordDecryptor.estimateCrackTime();
@@ -213,7 +217,64 @@ public class PasswordSecurityApp {
         System.out.println("From the example above you should gain some insights into the importance of password security.");
         System.out.println("Now focus on the influence of capital letters, and special characters in passwords. Use the game bellow to help you explore its impacts to its strngth.");
         System.out.println("You can play the game however mant time you want to see the difference.");
-
+        PasswordSecurityExplorer();
+        System.out.println("Now as you played the games multiple times what did you realize? Type your insights down in the text box bellow. \n(if you need to play the game again leave the text box empty and press enter))");
+        System.out.print("\nInsights:");
+        String insights = scanner.nextLine();
+        if (insights == ""){ //if the user wants to play the game again
+            PasswordSecurityExplorer();
+        }
+        if(insights.length() > 50){
+            System.out.println("Thank you for your insights. Looks like you have learned alot!!!");
+        } else {
+            System.out.println("Thank you for your insights. Looks like you have learned something!!!");
+        }
+        System.out.println("Bellow we provided some insights you should have gained from the game.");
+        System.out.println("Encrypted the password→the program prints out an estimated time how long it would take a hacker to crack it (brute force attack). \nThis is important because it directly shows how the length and complexity of a password affect security.");
+        System.out.println("Short password → cracked instantly.");
+        System.out.println("A slightly longer one → takes a few seconds.");
+        System.out.println("A complex password → could take years to crack.");
+        System.out.println("Password Length > Complexity - a 12 character password with only one lower case letter could be more secure than an 8 character password with symbols, numbers, abd uppercase letters.");
+        System.out.println("This challenges the common belief that adding symbols always makes a password stronger. Length is important because longer passwords exponentially increase the number of possible combinations.");
+        System.out.println("As always feel free to add anything else to our program your response will be stored and demonstrated to the next participant"); //Function does not work as we don't understand how to do this, could you teach us Mr.L?
+        System.out.print("\nAddition:");
+        String addition = scanner.nextLine();
+        ArrayList <String> responses = new ArrayList <String> ();
+        if(addition != "") {
+            responses.add(addition);
+            System.out.println("Thank you for your response.");
+        }
+        System.out.println("Do you want to learn about how our program estimates the time needed to crack a password? (y or n)");
+        if(scanner.nextLine() == "y") { //if the user wants to learn about how the program estimates the time needed to crack a password
+            System.out.println("The program uses the simplext brutal attack method to estimate the time needed to crack a password.");
+            System.out.println("It find the possible combonations of the password by determing if there is a lower case letter, upper case letter, number, ot special character.");
+            System.out.println("Then it calculates the length of the password to the power of combinations.");
+            System.out.println("The program then divides the number of combinations by the number of passwords it can check in a second.");
+            System.out.println("The result is the estimated time needed to crack the password.");
+            System.out.println("This is a very simple method and is not very accurate. It is only used to give a rough estimate of the time needed to crack a password.");
+            System.out.println("The actual time needed to crack a password depends on the method used and the computer used to crack it.");
+        } 
+        System.out.println("Thank you for participating in our program, we hope you learned something new.");
+            System.out.println("Do you want to send your insights to your email adress? (y or n)");
+            if (scanner.nextLine() == "y") {
+                System.out.println("Please enter your email adress bellow:");
+                String email = scanner.nextLine();
+                System.out.println("What is your name?");
+                String name = scanner.nextLine();
+                System.out.println("Thank you! Your insights will be sent to " + email + " shortly.");
+                System.out.println("Email Sent: ");
+                System.out.println("Dear " + name + ",");
+                System.out.println("Thank you for participating in our program, we hope you learned something new.");
+                System.out.println("Your insights:");
+                System.out.println(insights);
+                System.out.println("Your addition:");
+                System.out.println(addition);
+                System.out.println("We hope to see you again soon!");
+                System.out.println("Best regards,");
+                System.out.println("Aiden & Dingyi");
+            } else {
+                System.out.println("Thank you! See you next time!");
+        }
         scanner.close();
     }
     //Aiden Part Ends
