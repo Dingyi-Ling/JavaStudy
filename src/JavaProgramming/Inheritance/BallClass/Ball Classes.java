@@ -2,7 +2,7 @@ package JavaProgramming.Inheritance.BallClass;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Ball {
+class Ball {
 
 	public final int HEIGHT = 600, WIDTH = 600;
 
