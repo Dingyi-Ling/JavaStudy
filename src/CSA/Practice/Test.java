@@ -1,18 +1,14 @@
 package CSA.Practice;
 import java.util.ArrayList;
-public class Test {
-    public static void main(String[] args) {
-        int[][] mat = {{3,4,5},
-                {6,7,8}};
-        int sum = 0;
-        for (int[] arr: mat)
-        {
-            for (int n = 0; n < mat.length; n++){
-                sum += arr[n];
-                System.out.println(arr[n]);
-            }
-
+public class Test{
+    public static void main(String[] args){
+        System.out.println(mystery(4));
+    }
+    public static int mystery(int n){
+        if(n ==1){
+            return 3;
+        }else{
+            return 3 * mystery(n-1);
         }
-        System.out.println(sum);
     }
 }

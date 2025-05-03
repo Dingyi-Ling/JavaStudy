@@ -1,5 +1,6 @@
 package JavaProgramming.ArrayLists.IEM;
 
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -8,29 +9,19 @@ public class PasswordSecurityApp {
     //Dingyi's Part Starts
     //Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.
     static class CaesarCipher{
-        private static Random random = new Random();
+        private static final Random random = new Random();
         //creates a random shift value from 1 to 5
-        private static int shift = random.nextInt(5) + 1;
+        private static final int shift = random.nextInt(5) + 1;
         public CaesarCipher() {}
         //encrypts the text by shifting the characters by the shift value
         public String encrypt(String text){
-            String encryptedText = "";
+            StringBuilder encryptedText = new StringBuilder();
             for (int i = 0; i < text.length(); i++) {
                 char ch = text.charAt(i);
                 ch = (char) (ch + shift);
-                encryptedText += ch;
+                encryptedText.append(ch);
             }
-            return encryptedText;
-        }
-        //decrypts the text by shifting the characters back by the shift value
-        public String decrypt(String text){
-            String decryptedText = "";
-            for (int i = 0; i < text.length(); i++) {
-                char ch = text.charAt(i);
-                ch = (char) (ch - shift);
-                decryptedText += ch;
-            }
-            return decryptedText;
+            return encryptedText.toString();
         }
     }
     //Atbash Cipher is a substitution cipher where each letter in the plaintext is replaced with the letter at the same position in the alphabet but in reverse.
@@ -38,24 +29,21 @@ public class PasswordSecurityApp {
         public AtbashCipher() {}
         // Since Atbash is symmetric, encryption and decryption are identical.
         public String encrypt(String text) {
-            String encryptedText = "";
+            StringBuilder encryptedText = new StringBuilder();
             for (char ch : text.toCharArray()) {
                 if (ch >= 'A' && ch <= 'Z' || ch >= 'a' && ch <= 'z') {
-                    if (ch >= 'A' && ch <= 'Z') {
+                    if (ch <= 'Z') {
                         ch = (char) ('Z' - (ch - 'A'));
                     } else {
                         ch = (char) ('z' - (ch - 'a'));
                     }
                 }
-                encryptedText += ch;
+                encryptedText.append(ch);
             }
-            return encryptedText;
-        }
-        public String decrypt(String text) {
-            return encrypt(text);
+            return encryptedText.toString();
         }
     }
-    class PasswordDecryptor{
+    static class PasswordDecryptor{
         //The estimated time to crack a password is based on the number of possible combinations of characters in the password.
         private String encrypted;
         public PasswordDecryptor(){}
@@ -64,7 +52,7 @@ public class PasswordSecurityApp {
         }
         public double estimateCrackTime(){
             //Assuming that a computer can check 1 billion combinations per second.
-            double combinations = 0;
+            double combinations;
             combinations = Math.pow(encrypted.length(), calculateSize());
             combinations = combinations / 1000000000;
             return combinations;
@@ -110,7 +98,7 @@ public class PasswordSecurityApp {
         String encryptedByCaesar = caesarCipher.encrypt(password);
         System.out.println("Encrypted by Atbash: " + encryptedByAtbash);
         System.out.println("Encrypted by Caesar: " + encryptedByCaesar);
-        PasswordDecryptor passwordDecryptor = new PasswordSecurityApp().new PasswordDecryptor();
+        PasswordDecryptor passwordDecryptor = new PasswordDecryptor();
         passwordDecryptor.setEncrypted(encryptedByAtbash);
         double timeForAtbash = passwordDecryptor.estimateCrackTime();
         passwordDecryptor.setEncrypted(encryptedByCaesar);
@@ -131,14 +119,14 @@ public class PasswordSecurityApp {
             
             if (!password.isEmpty()) {
                 // Check for spaces in password
-                while (password.indexOf(" ") != -1) {
+                while (password.contains(" ")) {
                     System.out.println("Password cannot contain spaces. Please re-enter.");
                     System.out.print("\nEnter a password: ");
                     password = scanner.nextLine();
                 }
                 
                 System.out.println("\nSelect encryption method:\n1. Caesar Cipher\n2. Atbash Cipher\n3.No Encryption");
-                int choice = 0;
+                int choice;
                 System.out.print("Enter your choice (1, 2 or 3): ");
                 choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline left by nextInt()
@@ -165,7 +153,7 @@ public class PasswordSecurityApp {
                         break;
                 }
                 
-                PasswordDecryptor passwordDecryptor = new PasswordSecurityApp().new PasswordDecryptor();
+                PasswordDecryptor passwordDecryptor = new PasswordDecryptor();
                 passwordDecryptor.setEncrypted(encrypted);
                 double combinations = passwordDecryptor.estimateCrackTime();
                 System.out.println("Estimated time to crack: " + combinations + " seconds\n");
@@ -175,7 +163,7 @@ public class PasswordSecurityApp {
     public static void simplePasswordCrackTimeEstimate(String password){
         //The simplePasswordCrackTimeEstimate method is used to estimate the time it would take to crack a password.
         System.out.println("\n==== Simple Password Crack Time Estimate ====");
-        PasswordDecryptor passwordDecryptor = new PasswordSecurityApp().new PasswordDecryptor();
+        PasswordDecryptor passwordDecryptor = new PasswordDecryptor();
         passwordDecryptor.setEncrypted(password);
         double time = passwordDecryptor.estimateCrackTime();
         System.out.println("Estimated time to crack: " + time + " seconds");
@@ -202,22 +190,16 @@ public class PasswordSecurityApp {
         System.out.println("Now consider a new component encryption methods, the choice of encryption method could also make a huge differnce in the security of your code");
         System.out.println("Do you want a short introduction to ciphers? (1 for yes, 2 for no)");
         int response = scanner.nextInt();
-        if(response == 1) {
-            System.out.println("In this program we mainly focused on two simple ciphers to demonstrate the importance of it: \n Caeser Cipher and Atbash Cipher.");
-            System.out.println("Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.");
-            System.out.println("Atbash Cipher is a substitution cipher where each letter in the plaintext is replaced with the letter at the same position in the alphabet but in reverse.");
-            System.out.println("Bellow is a short game you can play to see the difference between the two.");
-            comparisonBetweenCiphers(scanner);
-        } else {
+        if (response != 1) {
             System.out.println("No way you're escaping this session, its so important to know!!!!");
             System.out.println("You have no choice (just checking if your following)");
             System.out.println("Lesson Starts!");
-            System.out.println("In this program we mainly focused on two simple ciphers to demonstrate the importance of it: \n Caeser Cipher and Atbash Cipher.");
-            System.out.println("Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.");
-            System.out.println("Atbash Cipher is a substitution cipher where each letter in the plaintext is replaced with the letter at the same position in the alphabet but in reverse.");
-            System.out.println("Bellow is a short game you can play to see the difference between the two.");
-            comparisonBetweenCiphers(scanner);
         }
+        System.out.println("In this program we mainly focused on two simple ciphers to demonstrate the importance of it: \n Caeser Cipher and Atbash Cipher.");
+        System.out.println("Caesar Cipher is a substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.");
+        System.out.println("Atbash Cipher is a substitution cipher where each letter in the plaintext is replaced with the letter at the same position in the alphabet but in reverse.");
+        System.out.println("Bellow is a short game you can play to see the difference between the two.");
+        comparisonBetweenCiphers(scanner);
         System.out.println();
         System.out.println("Password Strength");
         System.out.println("From the example above you should gain some insights into the importance of password security.");
@@ -227,7 +209,7 @@ public class PasswordSecurityApp {
         System.out.println("Now as you played the games multiple times what did you realize? Type your insights down in the text box bellow. \n(if you need to play the game again leave the text box empty and press enter))");
         System.out.print("\nInsights:");
         String insights = scanner.nextLine();
-        if (insights == ""){ //if the user wants to play the game again
+        if (Objects.equals(insights, "")){ //if the user wants to play the game again
             PasswordSecurityExplorer(scanner);
         }
         if(insights.length() > 50){
@@ -245,8 +227,8 @@ public class PasswordSecurityApp {
         System.out.println("As always feel free to add anything else to our program your response will be stored and demonstrated to the next participant"); //Function does not work as we don't understand how to do this, could you teach us Mr.L?
         System.out.print("\nAddition:");
         String addition = scanner.nextLine();
-        ArrayList <String> responses = new ArrayList <String> ();
-        if(addition != "") {
+        ArrayList <String> responses = new ArrayList<>();
+        if(!Objects.equals(addition, "")) {
             responses.add(addition);
             System.out.println("Thank you for your response.");
         }
