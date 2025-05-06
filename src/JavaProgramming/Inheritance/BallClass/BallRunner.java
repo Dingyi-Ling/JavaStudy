@@ -29,13 +29,13 @@ public class BallRunner extends JPanel implements Runnable {
 	
 	public void setup() {
 		ball_list = new ArrayList<Ball>();
-		ball_list.add(new Ball(100, 300, 30, 3, 5, Color.BLUE));
-//		ball_list.add(new BouncingBall(300, 100, 30, -6, -4, Color.BLUE));
-//		ball_list.add(new ColorBall(400, 200, 40, 6, -2));
+//		ball_list.add(new Ball(100, 300, 30, 3, 5, Color.BLUE));
+		ball_list.add(new BouncingBall(300, 100, 30, -6, -4, Color.BLUE));
+		ball_list.add(new ColorBall(400, 200, 40, 6, -2));
 //		ball_list.add(new SineBall(50, 300, 30, 3, 5, Color.CYAN));
 //		ball_list.add(new CirclePathBall(400, 400, 30, -5, 4, Color.ORANGE));
 //		ball_list.add(new CollisionBall(200, 500, 30, 4, 3, ball_list, Color.RED));
-//		ball_list.add(new ShrinkingBall(300, 300, 30, -3, 5, Color.BLACK));
+		ball_list.add(new ShrinkingBall(300, 300, 30, -3, 5, Color.BLACK));
 	}
 	
 	public void paint(Graphics g) throws ConcurrentModificationException{

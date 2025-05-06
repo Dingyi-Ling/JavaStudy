@@ -3,9 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 class Ball {
-
 	public final int HEIGHT = 600, WIDTH = 600;
-
 	private int x, y, rad, xspeed, yspeed;
 	private Color c;
 	
@@ -76,3 +74,4 @@ class Ball {
 		c = newcolor;
 	}
 }
+
