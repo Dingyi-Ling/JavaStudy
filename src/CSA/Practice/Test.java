@@ -23,10 +23,8 @@ public class Test{
 //        }
 //    }
     public static void main(String[] args) {
-        int r = 23;
-        int t = 10;
-        double a = r % t;
-        double b = r / t;
-        System.out.println(a + " " + b);
+        String test = "abcd";
+        test = test.substring(5);
+        System.out.println(test);
     }
 }

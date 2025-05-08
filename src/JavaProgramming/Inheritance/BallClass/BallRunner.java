@@ -12,14 +12,10 @@ public class BallRunner extends JPanel implements Runnable {
 	ArrayList<Ball> ball_list;
 	
 	public void run() {
-
 		while (true) {
-			
 			for (Ball b : ball_list)
 				b.move();
-				
 			repaint();
-			
 			try {
 				Thread.sleep(25);
 			} catch (Exception ex) {}
