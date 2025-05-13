@@ -1,4 +1,4 @@
-package chessLevel1;
+package JavaProgramming.Inheritance.ChessGame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;

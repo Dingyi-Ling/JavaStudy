@@ -1,4 +1,5 @@
-package chessLevel1;
+package JavaProgramming.Inheritance.ChessGame;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -9,11 +10,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Chess {
-	
-	
+
 	/******** DON'T EDIT THIS CLASS ********/
-	
-		
+
 	// constants that are predefined and won't change
 	public static final int WIDTH = 600;
 	public static final int SQUARE_WIDTH = WIDTH/8;
