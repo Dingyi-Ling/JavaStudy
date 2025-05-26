@@ -1,6 +1,6 @@
 package CSA.Chap9_Lesson4;
 
-public class SequtialSearch {
+public class SequentialSearch {
 
 	
 	public int search(int val,int[] datas) {
@@ -38,11 +38,11 @@ public class SequtialSearch {
 			}
 		}
 	}
-	public static void main(String[] args) {
-		int[] data = {23,4,2,9,30,5};
-		SequtialSearch ss = new SequtialSearch();
-		int pos = ss.search(10, data);
-		System.out.println(pos);
-	}
+        public static void main(String[] args) {
+                int[] data = {23,4,2,9,30,5};
+                SequentialSearch ss = new SequentialSearch();
+                int pos = ss.search(10, data);
+                System.out.println(pos);
+        }
 
 }
