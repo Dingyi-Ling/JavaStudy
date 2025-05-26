@@ -12,7 +12,7 @@ public class Minesweeper extends JFrame {
     private static final int EXPERT_SIZE = 24;
     private static final int BEGINNER_MINES = 10;
     private static final int INTERMEDIATE_MINES = 40;
-    private static final int EXPERT_MINES = 88;
+    private static final int EXPERT_MINES = 99;
     private static final int CELL_SIZE = 30;
 
     // Game variables

@@ -72,7 +72,8 @@ public class NimGame {
     return pileSize - take;
     }
     public static int nearestPowerOfTwoMinusOne(int n) {
-        //uses a integrated module in the class integers.lang to find the closest multiple 2 add one smaller than the number
+        // Use Integer.highestOneBit to find the largest power of two less than
+        // or equal to n, then subtract one.
         int power = Integer.highestOneBit(n);
         return power - 1;
     }
